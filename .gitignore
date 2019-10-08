@@ -9,5 +9,7 @@
 # Local resource files
 /resources/*
 
+# License file
+/charts/gateway/files/license.xml
 # Local
 *.DS_Store
