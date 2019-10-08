@@ -22,12 +22,12 @@ kibana:
 
   ingress:
     enabled: true
-    path: /*
+    path: /
     annotations:
-      kubernetes.io/ingress.class: gce
+      kubernetes.io/ingress.class: nginx
       kubernetes.io/ingress.global-static-ip-name: "kibana-ip"
     hosts:
-      - kibana.example.com/*
+      - kibana.example.com
     tls:
       - secretName: kibana-tls
         hosts:

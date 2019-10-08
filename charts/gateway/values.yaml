@@ -14,18 +14,18 @@ updateStrategy: {}
   #   maxSurge: 1
 #   maxUnavailable: 0
 container:
-  image: docker.k8s.apimsvc.ca.com/repository/docker-hosted/gateway
-  tag: gateway_json-135
+  image: docker.test.com/repository/docker-hosted/gateway
+  tag: latest
   pullPolicy: Always
 
 imageCredentials:
-    name: docker.k8s.apimsvc.ca.com
-    registry: docker.k8s.apimsvc.ca.com
+    name: docker.test.com
+    registry: docker.test.com
     username: admin
-    password:
+    password: CAdemo123!
 
 service:
-  type: LoadBalancer
+  type: NodePort
   # clusterIP: None
   ## LoadBalancer IP if service.type is LoadBalancer
   ## Default: nil
@@ -57,11 +57,11 @@ readinessProbe:
 
 resources:
   requests:
-    memory: 2Gi
+    memory: 1Gi
     cpu: 1
   limits:
-    memory: 4Gi
-    cpu: 3
+    memory: 2Gi
+    cpu: 2
 
 nodeSelector: {}
 
@@ -70,11 +70,11 @@ tolerations: []
 afinity: {}
 
 gateway:
-  heapSize: "3g"
+  heapSize: "1g"
   javaArgs: ""
   license:
     value:
-    accept: false
+    accept: true
   customTlsKey:
     enabled: false
     secretName: gw-tls

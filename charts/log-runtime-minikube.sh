@@ -1,0 +1,1 @@
+helm install --name apim-logs-runtime-elasticsearch-client elastic/elasticsearch --version 6.6.0-alpha1 --set clusterName=apim-logs-runtime --set nodeGroup=elasticsearch-client --set replicas=1 --set minimumMasterNodes=1 --set resources.requests.memory=1Gi --set volumeClaimTemplate.resources.requests.storage=10Gi

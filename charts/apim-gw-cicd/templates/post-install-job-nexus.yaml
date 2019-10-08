@@ -58,7 +58,7 @@ spec:
                   then
                       Retries=0;
                       while [[ $Retries -lt 15 ]];
-                          do HTTP_CODE_ADD="$(curl -s -o /dev/null -w ''%{http_code}'' --max-time 5 --header 'Content-Type:application/json' -u admin:$ADMIN_PASS_OLD -XPOST https://{{ index .Values "sonatype-nexus" "nexusProxy" "env" "nexusHttpHost" }}:443/service/rest/v1/script --data '{"name":"createDockerRepository","content":"import org.sonatype.nexus.blobstore.api.BlobStoreManager;import org.sonatype.nexus.repository.storage.WritePolicy;repository.createDockerHosted('"'"'docker-hosted'"'"',5003,null,BlobStoreManager.DEFAULT_BLOBSTORE_NAME,false,true,WritePolicy.ALLOW)","type":"groovy"}')";
+                          do HTTP_CODE_ADD="$(curl -k -s -o /dev/null -w ''%{http_code}'' --max-time 5 --header 'Content-Type:application/json' -u admin:$ADMIN_PASS_OLD -XPOST https://{{ index .Values "sonatype-nexus" "nexusProxy" "env" "nexusHttpHost" }}:443/service/rest/v1/script --data '{"name":"createDockerRepository","content":"import org.sonatype.nexus.blobstore.api.BlobStoreManager;import org.sonatype.nexus.repository.storage.WritePolicy;repository.createDockerHosted('"'"'docker-hosted'"'"',5003,null,BlobStoreManager.DEFAULT_BLOBSTORE_NAME,false,true,WritePolicy.ALLOW)","type":"groovy"}')";
                           [[ $HTTP_CODE_ADD == "204" ]] && break;
                           sleep 5;
                           Retries=$( expr $Retries + 1 );
@@ -110,7 +110,7 @@ spec:
                   then
                       Retries=0;
                       while [[ $Retries -lt 5 ]];
-                          do HTTP_CODE_ADD="$(curl -s -o /dev/null -w ''%{http_code}'' --max-time 5 --header 'Content-Type:application/json' -u admin:$ADMIN_PASS_OLD -XPOST https://{{ index .Values "sonatype-nexus" "nexusProxy" "env" "nexusHttpHost" }}:443/service/rest/v1/script --data '{"name":"changeAdminPassword","content":"security.securitySystem.changePassword('"'"'admin'"'"','"'"'{{ .Values.nexusAdminPassword }}'"'"')","type":"groovy"}')";
+                          do HTTP_CODE_ADD="$(curl -k -s -o /dev/null -w ''%{http_code}'' --max-time 5 --header 'Content-Type:application/json' -u admin:$ADMIN_PASS_OLD -XPOST https://{{ index .Values "sonatype-nexus" "nexusProxy" "env" "nexusHttpHost" }}:443/service/rest/v1/script --data '{"name":"changeAdminPassword","content":"security.securitySystem.changePassword('"'"'admin'"'"','"'"'{{ .Values.nexusAdminPassword }}'"'"')","type":"groovy"}')";
                           [[ $HTTP_CODE_ADD == "204" ]] && break;
                           sleep 5;
                           Retries=$( expr $Retries + 1 );

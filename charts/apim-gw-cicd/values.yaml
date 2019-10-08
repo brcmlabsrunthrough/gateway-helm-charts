@@ -9,10 +9,11 @@ sonatype-nexus:
 
   ingress:
     enabled: true
-    path: /*
+    path: /
     annotations:
-      kubernetes.io/ingress.class: gce
+      kubernetes.io/ingress.class: nginx
       kubernetes.io/ingress.global-static-ip-name: "nexus-ip"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
     tls:
       enabled: true
       secretName: tls
@@ -30,10 +31,11 @@ jenkins:
     HostName: jenkins.example.com
 
     Ingress:
-      Path: /*
+      Path: /
       Annotations:
-        kubernetes.io/ingress.class: gce
+        kubernetes.io/ingress.class: nginx
         kubernetes.io/ingress.global-static-ip-name: "jenkins-ip"
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
       TLS:
         - secretName: tls
           hosts:
@@ -102,3 +104,4 @@ jenkins:
         name: docker-socket-volume
       - mountPath: /usr/bin/docker
         name: docker-binary
+
